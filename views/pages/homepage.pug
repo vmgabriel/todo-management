@@ -1,0 +1,41 @@
+extends layout.pug
+
+block content
+  .container
+    .row.content
+      a.btn.btn-primary.btn-lg.btn-block(type="button" href="/card") New Card
+      .col-sm-12.col-md-4.table
+        p.title.title-top To Do
+        each info in locals.query
+          if info.state == 1
+            .tarjeta
+              h6= info.title
+              p.descripcion= info.description
+              p.fecha= 'Init: '+ info.initDate
+              p.fecha= 'Due: '+ info.dueDate
+              a.btn.btn-primary.btn-lg.btn-block(href='/card/'+ info.idc  role='button') View
+        p.title.title-bot To Do
+      .col-sm-12.col-md-4.table
+        p.title.title-top Doing
+        each info in locals.query
+          .tarjeta
+            if info.state == 2
+              .tarjeta
+                h6= info.title
+                p.descripcion= info.description
+                p.fecha= 'Init: '+ info.initDate
+                p.fecha= 'Due: '+ info.dueDate
+                a.btn.btn-primary.btn-lg.btn-block(href='/card/'+ info.idc  role='button') View
+        p.title.title-bot Doing
+      .col-sm-12.col-md-4.table
+        p.title.title-top Done
+        each info in locals.query
+          .tarjeta
+            if info.state == 3
+              .tarjeta
+                h6= info.title
+                p.descripcion= info.description
+                p.fecha= 'Init: '+ info.initDate
+                p.fecha= 'Due: '+ info.dueDate
+                a.btn.btn-primary.btn-lg.btn-block(href='/card/'+ info.idc  role='button') View
+        p.title.title-bot Done

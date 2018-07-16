@@ -1,4 +1,4 @@
-FROM node:4.0.0
+FROM node:8.9.4-alpine
 
 WORKDIR /sails
 # some bash niceties

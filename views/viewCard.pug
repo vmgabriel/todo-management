@@ -1,0 +1,74 @@
+extends layout.pug
+
+block content
+  .container
+    .container
+      .seccion-info
+        h3 View Information of Card
+
+        form(method="POST" name="formmain" action="/card/edit/"+locals.query.id)
+          input(type='hidden' name='id' value=locals.query.idc)
+          input(type='hidden' name='status' value=locals.query.status)
+          .form-group
+            label.col-form-label(for='title-card') Title:
+            input#title.form-control(type='text' name='title' value=""+locals.query.title readonly)
+          .form-group
+            label.col-form-label(for='descriptiom-card') Description:
+            textarea#description.form-control(name='description' readonly)= locals.query.description
+          .form-group
+            label.col-form-label(for='ini-date-card') Initial Date:
+            input#initDate.form-control(type='text' name='initDate' value=""+locals.query.initDate readonly)
+          .form-group
+            label.col-form-label(for='due-date-card') Due Date:
+            input#dueDate.form-control(type='text' name='dueDate' value=""+locals.query.dueDate readonly)
+          .container
+            .container.caja-check
+              .form-group
+                .row
+                  .mx-auto
+                    input#updated.form-control.custom.control.label(type='checkbox' onClick="document.getElementById('title').readOnly=!document.getElementById('title').readOnly;document.getElementById('description').readOnly=!document.getElementById('description').readOnly;document.getElementById('initDate').readOnly=!document.getElementById('initDate').readOnly;document.getElementById('dueDate').readOnly=!document.getElementById('dueDate').readOnly;")
+                    label.custom-control-label(for='updated') Change Record
+
+        .row
+          if locals.query.state == 1
+            .col-sm-6
+              a.btn.btn-primary.btn-lg.btn-block(onClick="document.dataChange2.submit();") Change to Doing
+            .col-sm-6
+              a.btn.btn-secondary.btn-lg.btn-block(onClick="document.dataChange3.submit();") Change to Done
+          if locals.query.state == 2
+            .col-sm-6
+              a.btn.btn-primary.btn-lg.btn-block(onClick="document.dataChange1.submit();") Change to To Do
+            .col-sm-6
+              a.btn.btn-secondary.btn-lg.btn-block(onClick="document.dataChange3.submit();") Change to Done
+          if locals.query.state == 3
+            .col-sm-6
+              a.btn.btn-primary.btn-lg.btn-block(onClick="document.dataChange1.submit();") Change to To Do
+            .col-sm-6
+              a.btn.btn-secondary.btn-lg.btn-block(onClick="document.dataChange2.submit();") Change to Doing
+
+        .row.btn-alejar
+          .col-sm-6
+            button#btn-update.btn.btn-primary.btn-lg.btn-block(onClick="document.formmain.submit();") Update Card
+          .col-sm-6
+            button.btn.btn-primary.btn-lg.btn-block(data-toggle="modal" data-target="#dialogDeleteConfirm") Delete Card
+
+  .modal.fade#dialogDeleteConfirm(tabindex='-1' role='dialog' aria-labelledby="dialogDeleteConfirmLabel" aria-hidden="true")
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          h5#dialogDeleteConfirmLabel.modal-title Delete Card
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          p Are you sure you want to eliminate?
+        .modal-footer
+          a.btn.btn-primary(type='button' href="/card/"+locals.query.id+"/del" role='button') Yes!
+          button.btn.btn-secondary(data-dismiss='modal') Close
+
+  form(action='/card/state/'+locals.query.id method='post' name='dataChange2')
+    input(type='hidden' name='status' value=2)
+  form(action='/card/state/'+locals.query.id method='post' name='dataChange1')
+    input(type='hidden' name='status' value=1)
+  form(action='/card/state/'+locals.query.id method='post' name='dataChange3')
+    input(type='hidden' name='status' value=3)
+

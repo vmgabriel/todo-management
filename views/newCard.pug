@@ -1,0 +1,24 @@
+extends layout.pug
+
+block content
+  .container
+    .container
+      h3 New Card
+      form(method='post')
+        .form-group
+          label.col-form-label(for='title-card') Title:
+          input#title.form-control(type='text' name='title')
+        .form-group
+          label.col-form-label(for='descriptiom-card') Description:
+          textarea#description.form-control(name='description')
+        .form-group
+          label.col-form-label(for='ini-date-card') Initial Date:
+          input#initDate.form-control(type='text' name='initDate')
+        .form-group
+          label.col-form-label(for='due-date-card') Due Date:
+          input#dueDate.form-control(type='text' name='dueDate')
+        .form-group
+          .row
+            button.btn.btn-primary.col-sm-6.btn-lg.btn-block(type='submit') Create
+            a.btn.btn-secondary.col-sm-6.btn-lg.back(href='/' role='button') Back
+

@@ -19,11 +19,12 @@ Nodejs
 Sails
 
 
+Estilos - pre-procesador LESS
 
 View Engine - PUG
 
 
 
-DB - Persistence
+DB - Persistence - MONGO
 
 
